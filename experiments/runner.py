@@ -14,7 +14,7 @@ if __name__ == "__main__":
     parser.add_argument("--run")
     args = parser.parse_args()
 
-    cv = StratifiedKFold(n_splits=10, shuffle=True, random_state=7)
+    cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=7)
 
     if args.run:
         f = open(args.run, "r+")

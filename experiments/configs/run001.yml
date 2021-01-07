@@ -17,7 +17,7 @@ cols_definition:
 model_name: 'ModelCatClassifier'
 params: {
   'depth': 5,
-  'learning_rate': 0.1,
+  'learning_rate': 0.01,
   'iterations': 10000,
   'loss_function': 'Logloss',
   'random_seed': 777,

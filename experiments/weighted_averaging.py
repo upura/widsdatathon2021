@@ -51,9 +51,8 @@ def make_submission(pred, run_name: str):
 run_ids = [
     'run000',
     'run001',
-    'run002',
 ]
-run_name = 'weight001'
+run_name = 'weight000'
 
 if __name__ == '__main__':
     y_train = Data.load('../input/pickle/y_train_fe000.pkl')
