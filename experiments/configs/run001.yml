@@ -16,9 +16,9 @@ cols_definition:
   target_col: 'diabetes_mellitus'
 model_name: 'ModelCatClassifier'
 params: {
-  'depth': 5,
+  'depth': 4,
   'learning_rate': 0.01,
-  'iterations': 10000,
+  'iterations': 50000,
   'loss_function': 'Logloss',
   'random_seed': 777,
   'allow_writing_files': False,

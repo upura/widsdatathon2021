@@ -17,8 +17,8 @@ cols_definition:
 model_name: 'ModelLGBM'
 params: {
   'objective': 'binary',
-  'num_leaves': 24,
-  'max_depth': 5,
+  'num_leaves': 14,
+  'max_depth': 4,
   "feature_fraction": 0.8,
   'subsample_freq': 1,
   "bagging_fraction": 0.7,
