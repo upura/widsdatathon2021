@@ -48,14 +48,37 @@ if __name__ == '__main__':
     ], axis=1).to_feather('../input/feather/train_test.ftr')
 
     # count null
-    count_null(train_test, train_test.columns).to_feather('../input/feather/count_null.ftr')
+    count_null(train_test,
+               train_test.drop(target_col, axis=1).columns).to_feather('../input/feather/count_null.ftr')
 
     # count encoding
-    count_encoding(train_test, categorical_cols).to_feather('../input/feather/count_encoding.ftr')
-    count_encoding_interact(train_test, categorical_cols).to_feather('../input/feather/count_encoding_interact.ftr')
+    count_encoding(train_test, [
+        'ethnicity',
+        'gender',
+        'hospital_admit_source',
+        'icu_admit_source',
+        'icu_stay_type',
+        'icu_type'
+    ]).to_feather('../input/feather/count_encoding.ftr')
+    count_encoding_interact(train_test, [
+        'ethnicity',
+        'gender',
+        'hospital_admit_source',
+        'icu_admit_source',
+        'icu_stay_type',
+        'icu_type'
+    ]).to_feather('../input/feather/count_encoding_interact.ftr')
 
     # target encoding
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=7)
     _train = train_test.dropna(subset=[target_col]).copy()
     _test = train_test.loc[train_test[target_col].isnull()].copy()
-    target_encoding(_train, _test, categorical_cols, target_col, cv).to_feather('../input/feather/target_encoding.ftr')
+    target_encoding(_train, _test, [
+        'ethnicity',
+        'gender',
+        'hospital_admit_source',
+        'icu_admit_source',
+        # 'icu_stay_type',
+        'icu_type',
+        'icu_id'
+    ], target_col, cv).to_feather('../input/feather/target_encoding.ftr')
