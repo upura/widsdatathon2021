@@ -333,7 +333,8 @@ class Runner:
                 self.cv.split(self.X_train, self.X_train[self.cols_definition["cv_y"]])
             )[i_fold]
         else:
-            return list(self.cv.split(self.X_train, self.y_train))[i_fold]
+            groups = pd.read_csv('../input/TrainingWiDS2021.csv.zip')['hospital_id']
+            return list(self.cv.split(self.X_train, self.y_train, groups))[i_fold]
 
     def submission(self) -> None:
         pred = Data.load(f"../output/pred/{self.run_name}-test.pkl")
