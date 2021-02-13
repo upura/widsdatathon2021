@@ -115,37 +115,6 @@ if __name__ == '__main__':
             ],
             'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
         },
-        {
-            'key': [
-                'hospital_id'
-            ],
-            'var': [
-                'd1_glucose_max',
-                'glucose_apache',
-                'bmi',
-                'age',
-                'd1_glucose_min',
-                'd1_creatinine_min',
-                'weight'
-            ],
-            'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
-        },
-        {
-            'key': [
-                'icu_id',
-                'hospital_id'
-            ],
-            'var': [
-                'd1_glucose_max',
-                'glucose_apache',
-                'bmi',
-                'age',
-                'd1_glucose_min',
-                'd1_creatinine_min',
-                'weight'
-            ],
-            'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
-        },
     ]
     nunique_dict = [
         {

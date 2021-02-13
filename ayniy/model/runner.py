@@ -333,6 +333,10 @@ class Runner:
                 self.cv.split(self.X_train, self.X_train[self.cols_definition["cv_y"]])
             )[i_fold]
         else:
+            # adversarial_validation
+            # tr_group = pd.read_csv('../input/TrainingWiDS2021.csv.zip')
+            # te_group = pd.read_csv('../input/UnlabeledWiDS2021.csv.zip')
+            # groups = pd.concat([tr_group, te_group], sort=False).reset_index(drop=True)['hospital_id']
             groups = pd.read_csv('../input/TrainingWiDS2021.csv.zip')['hospital_id']
             return list(self.cv.split(self.X_train, self.y_train, groups))[i_fold]
 

@@ -1,17 +1,12 @@
-description: LightGBM
+description: LightGBM adversarial validation
 exp_name: 'wids2021'
-run_name: 'run010'
+run_name: 'run011'
 fe_name: 'fe003_top300'
 data:
   sample_submission: '../input/SolutionTemplateWiDS2021.csv'
 cols_definition:
   categorical_col: [
     'ethnicity',
-    # 'gender',
-    # 'hospital_admit_source',
-    # 'icu_admit_source',
-    # 'icu_stay_type',
-    # 'icu_type'
   ]
   target_col: 'diabetes_mellitus'
 model_name: 'ModelLGBM'
@@ -33,3 +28,5 @@ params: {
   "early_stopping_rounds": 100
 }
 evaluation_metric: 'auc'
+advanced:
+  adversarial_validation:
