@@ -20,16 +20,12 @@ def load_pred_from_run_id(run_id: str, to_rank: False):
 
 
 run_ids = [
-    'run015',
-    'run016',
     'run017',
     'run018',
-    'run019',
-    'run020',
     'run021',
     'run022',
 ]
-fe_name = 'stack000'
+fe_name = 'stack001'
 
 if __name__ == "__main__":
     y_train = Data.load('../input/pickle/y_train_fe000.pkl')
