@@ -71,18 +71,18 @@ if __name__ == '__main__':
     ]).to_feather('../input/feather/count_encoding_interact.ftr')
 
     # target encoding
-    # cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=7)
-    # _train = train_test.dropna(subset=[target_col]).copy()
-    # _test = train_test.loc[train_test[target_col].isnull()].copy()
-    # target_encoding(_train, _test, [
-    #     'ethnicity',
-    #     'gender',
-    #     'hospital_admit_source',
-    #     'icu_admit_source',
-    #     # 'icu_stay_type',
-    #     'icu_type',
-    #     'icu_id'
-    # ], target_col, cv).to_feather('../input/feather/target_encoding.ftr')
+    cv = StratifiedKFold(n_splits=10, shuffle=True, random_state=7)
+    _train = train_test.dropna(subset=[target_col]).copy()
+    _test = train_test.loc[train_test[target_col].isnull()].copy()
+    target_encoding(_train, _test, [
+        'ethnicity',
+        'gender',
+        'hospital_admit_source',
+        'icu_admit_source',
+        # 'icu_stay_type',
+        'icu_type',
+        'icu_id'
+    ], target_col, cv).to_feather('../input/feather/target_encoding10.ftr')
 
     # matrix factorization
     # features_svd, features_lda = matrix_factorization(
