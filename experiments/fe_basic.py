@@ -44,7 +44,8 @@ if __name__ == '__main__':
     ce = CategoricalEncoder(categorical_cols)
     train_test = ce.transform(train_test)
     train_test.drop([
-        'hospital_id'
+        'hospital_id',
+        'icu_id'
     ], axis=1).to_feather('../input/feather/train_test.ftr')
 
     # count null
@@ -70,15 +71,97 @@ if __name__ == '__main__':
     ]).to_feather('../input/feather/count_encoding_interact.ftr')
 
     # target encoding
-    cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=7)
-    _train = train_test.dropna(subset=[target_col]).copy()
-    _test = train_test.loc[train_test[target_col].isnull()].copy()
-    target_encoding(_train, _test, [
-        'ethnicity',
-        'gender',
-        'hospital_admit_source',
-        'icu_admit_source',
-        # 'icu_stay_type',
-        'icu_type',
-        'icu_id'
-    ], target_col, cv).to_feather('../input/feather/target_encoding.ftr')
+    # cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=7)
+    # _train = train_test.dropna(subset=[target_col]).copy()
+    # _test = train_test.loc[train_test[target_col].isnull()].copy()
+    # target_encoding(_train, _test, [
+    #     'ethnicity',
+    #     'gender',
+    #     'hospital_admit_source',
+    #     'icu_admit_source',
+    #     # 'icu_stay_type',
+    #     'icu_type',
+    #     'icu_id'
+    # ], target_col, cv).to_feather('../input/feather/target_encoding.ftr')
+
+    # matrix factorization
+    # features_svd, features_lda = matrix_factorization(
+    #     train_test, [
+    #         'icu_type',
+    #         'icu_id'
+    #     ],
+    #     {'n_components_lda': 5, 'n_components_svd': 5}
+    # )
+
+    # features_svd.columns = [str(c) for c in features_svd.columns]
+    # features_lda.columns = [str(c) for c in features_lda.columns]
+    # features_svd.to_feather('../input/feather/features_svd.ftr')
+    # features_lda.to_feather('../input/feather/features_lda.ftr')
+
+    # aggregation
+    groupby_dict = [
+        {
+            'key': [
+                'icu_id',
+            ],
+            'var': [
+                'd1_glucose_max',
+                'glucose_apache',
+                'bmi',
+                'age',
+                'd1_glucose_min',
+                'd1_creatinine_min',
+                'weight'
+            ],
+            'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
+        },
+        {
+            'key': [
+                'hospital_id'
+            ],
+            'var': [
+                'd1_glucose_max',
+                'glucose_apache',
+                'bmi',
+                'age',
+                'd1_glucose_min',
+                'd1_creatinine_min',
+                'weight'
+            ],
+            'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
+        },
+        {
+            'key': [
+                'icu_id',
+                'hospital_id'
+            ],
+            'var': [
+                'd1_glucose_max',
+                'glucose_apache',
+                'bmi',
+                'age',
+                'd1_glucose_min',
+                'd1_creatinine_min',
+                'weight'
+            ],
+            'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
+        },
+    ]
+    nunique_dict = [
+        {
+            'key': ['icu_id'],
+            'var': ['icu_type'],
+            'agg': ['nunique']
+        }
+    ]
+
+    original_cols = train_test.columns
+    groupby = GroupbyTransformer(param_dict=nunique_dict)
+    train_test = groupby.transform(train_test)
+    groupby = GroupbyTransformer(param_dict=groupby_dict)
+    train_test = groupby.transform(train_test)
+    diff = DiffGroupbyTransformer(param_dict=groupby_dict)
+    train_test = diff.transform(train_test)
+    ratio = RatioGroupbyTransformer(param_dict=groupby_dict)
+    train_test = ratio.transform(train_test)
+    train_test[list(set(train_test.columns) - set(original_cols))].to_feather('../input/feather/aggregation.ftr')
