@@ -1,3 +1,3 @@
-python runner.py --run configs/run018.yml
-python runner.py --run configs/run019.yml
-python runner.py --run configs/run020.yml
+python create_base.py
+python runner.py --run configs/run021.yml
+python runner.py --run configs/run022.yml
