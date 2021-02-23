@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
     fe_id_u = 'fe006'
     run_id = 'run021'
-    N_FEATURES = 100
+    N_FEATURES = 300
 
     X_train_u = Data.load(f'../input/pickle/X_train_{fe_id_u}.pkl')
     X_test_u = Data.load(f'../input/pickle/X_test_{fe_id_u}.pkl')
@@ -46,7 +46,9 @@ if __name__ == '__main__':
     X_test = pd.concat([X_test, X_test_u], axis=1)
     print(X_train.shape, X_test.shape)
 
-    fe_name = 'fe008'
+    print(X_train.select_dtypes('category').columns)
+
+    fe_name = 'fe009'
     Data.dump(X_train, f'../input/pickle/X_train_{fe_name}.pkl')
     Data.dump(X_test, f'../input/pickle/X_test_{fe_name}.pkl')
     Data.dump(y_train, f'../input/pickle/y_train_{fe_name}.pkl')

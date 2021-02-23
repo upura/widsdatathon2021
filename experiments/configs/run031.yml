@@ -1,0 +1,48 @@
+description: CatBoost
+exp_name: 'wids2021'
+run_name: 'run031'
+fe_name: 'fe009'
+data:
+  sample_submission: '../input/SolutionTemplateWiDS2021.csv'
+cols_definition:
+  categorical_col: [
+    'intubated_apache',
+    'glucose_wb',
+    'hepatic_failure',
+    'gcs_eyes_apache',
+    'hospital_admit_source',
+    'icu_stay_type',
+    'cirrhosis',
+    'solid_tumor_with_metastasis',
+    'gender',
+    'glucose_normal',
+    'arf_apache',
+    'icu_id',
+    'apache_3j_diagnosis_x',
+    'ventilated_apache',
+    'apache_2_diagnosis_x',
+    'glucose_rate',
+    'elective_surgery',
+    'immunosuppression',
+    'leukemia',
+    'apache_2_diagnosis_type',
+    'apache_3j_diagnosis_type',
+    'gcs_sum_type',
+    'apache_3j_diagnosis_split1',
+    'apache_2_diagnosis_split1',
+    'total_chronic',
+    'total_cancer_immuno'
+  ]
+  target_col: 'diabetes_mellitus'
+model_name: 'ModelCatClassifier'
+params: {
+  'depth': 4,
+  'learning_rate': 0.01,
+  'iterations': 50000,
+  'loss_function': 'Logloss',
+  'random_seed': 777,
+  'allow_writing_files': False,
+  'task_type': "CPU",
+  'early_stopping_rounds': 50
+}
+evaluation_metric: 'auc'
