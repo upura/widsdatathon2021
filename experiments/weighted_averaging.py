@@ -53,8 +53,9 @@ run_ids = [
     'run018',
     'run021',
     'run022',
+    'run026',
 ]
-run_name = 'weight012'
+run_name = 'weight013'
 
 if __name__ == '__main__':
     y_train = Data.load('../input/pickle/y_train_fe000.pkl')
