@@ -71,7 +71,7 @@ if __name__ == '__main__':
     ]).to_feather('../input/feather/count_encoding_interact.ftr')
 
     # target encoding
-    cv = StratifiedKFold(n_splits=10, shuffle=True, random_state=7)
+    cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=7)
     _train = train_test.dropna(subset=[target_col]).copy()
     _test = train_test.loc[train_test[target_col].isnull()].copy()
     target_encoding(_train, _test, [
