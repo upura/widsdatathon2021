@@ -24,8 +24,14 @@ run_ids = [
     'run018',
     'run021',
     'run022',
+    'run026',
+    'run027',
+    'run028',
+    'run029',
+    'run030',
+    'run031',
 ]
-fe_name = 'stack001'
+fe_name = 'stack002'
 
 if __name__ == "__main__":
     y_train = Data.load('../input/pickle/y_train_fe000.pkl')
