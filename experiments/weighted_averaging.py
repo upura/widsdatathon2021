@@ -55,12 +55,13 @@ run_ids = [
     # 'run022',
     'run026',
     'run027',
+    'run028',
 ]
-run_name = 'weight014'
+run_name = 'weight015_rank'
 
 if __name__ == '__main__':
     y_train = Data.load('../input/pickle/y_train_fe000.pkl')
-    data = [load_from_run_id(ri, to_rank=False) for ri in run_ids]
+    data = [load_from_run_id(ri, to_rank=True) for ri in run_ids]
 
     for d in data:
         print(roc_auc_score(y_train, d[0]))
