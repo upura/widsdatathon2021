@@ -52,10 +52,12 @@ run_ids = [
     'run017',
     'run018',
     'run021',
-    'run022',
+    # 'run022',
     'run026',
+    'run027',
+    'run028',
 ]
-run_name = 'weight013_pb2'
+run_name = 'weight016_pb2'
 
 if __name__ == '__main__':
     y_train = Data.load('../input/pickle/y_train_fe000.pkl')
@@ -72,5 +74,5 @@ if __name__ == '__main__':
     pb_preds = pd.read_csv('../output/submissions/submission_0872.csv')
     pb_preds = pb_preds.sort_values('encounter_id').reset_index(drop=True)
     pb_preds = pb_preds['diabetes_mellitus'].values
-    preds = 0.3 * upura_preds + pb_preds * 0.7
+    preds = 0.5 * upura_preds + pb_preds * 0.5
     make_submission(preds, run_name)
